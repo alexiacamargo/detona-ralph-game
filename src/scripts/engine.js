@@ -34,7 +34,7 @@ function countDown() {
         if (state.values.lives > 0) {
             Swal.fire({
                 title: 'Você perdeu uma vida!',
-                text: state.values.lives === 1 ? 'Você tem apenas 1 vida restante.' : 'Você tem ' + state.values.lives + ' vidas restantes. Seu resultado é: ' + state.values.result,
+                text: state.values.lives === 1 ? 'Você tem apenas 1 vida restante.\n' : 'Você tem ' + state.values.lives + ' vidas restantes.\n' + 'Sua pontuação é: ' + state.values.result + ' pontos!',
                 icon: 'warning',
                 confirmButtonText: 'Continuar'
             }).then((result) => {
@@ -51,7 +51,7 @@ function countDown() {
             // Game Over
             Swal.fire({
                 title: 'Game Over!',
-                text: state.values.lives === 1 ? 'Você perdeu a sua única vida!' : 'Você perdeu todas as suas vidas! Seu resultado foi: ' + state.values.result,
+                text: state.values.lives === 1 ? 'Você perdeu a sua única vida!\n' : 'Você perdeu todas as suas vidas!\nSua pontuação é: ' + state.values.result + ' pontos!',
                 icon: 'error',
                 confirmButtonText: 'Reiniciar'
             }).then((result) => {
