@@ -17,19 +17,21 @@
     <div class="container">
         <div class="menu">
             <div class="menu-time">
-                <h2 style="color: red;">Time Left</h2>
-                <h2 id="time-left">0</h2>
+                <h2 class="title">Time Left</h2>
+                <h2 id="time-left">60</h2>
             </div>
             <div class="menu-score">
-                <h2 style="color: red;">Your Score</h2>
+                <h2 class="title">Your Score</h2>
                 <h2 id="score">0</h2>
             </div>
             <div class="menu-lives">
-                <img src="./src/images/player.png" alt="foto do jogador" height="60px"/>
-                <h2 id="lives-display">x3</h2>
+                <img src="./src/images/player.png" alt="Jogador" height="40px" style="vertical-align: middle; margin-right: 5px;">
+                <h2 id="lives-display" style="display: inline-block; font-size: 2.5vw; font-weight: bold; color: #ff0000;">
+                    Lives: <span>x3</span>
+                </h2>
             </div>
-            <div class="menu-high-score">
-                <h2 style="color: red;">High Score</h2>
+            <div class="menu-high-score" style="margin-left: 20px;">
+                <h2 class="title">High Score</h2>
                 <h2 id="high-score">0</h2>
             </div>
         </div>
@@ -40,19 +42,18 @@
                 <div class="square" id="2"></div>
                 <div class="square" id="3"></div>
             </div>
-
             <div class="panel-row">
                 <div class="square" id="4"></div>
                 <div class="square" id="5"></div>
                 <div class="square" id="6"></div>
             </div>
-
             <div class="panel-row">
                 <div class="square" id="7"></div>
                 <div class="square" id="8"></div>
                 <div class="square" id="9"></div>
             </div>
         </div>
+    </div>
 
     <script defer src="./src/scripts/engine.js"></script>
 </body>

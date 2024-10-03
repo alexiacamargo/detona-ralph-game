@@ -1,8 +1,15 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     background-image: url("../images/wall.png");
+    background-color: #f0f0f0; /* Fallback color */
 }
 
 .menu {
@@ -11,54 +18,98 @@
     align-items: center;
     height: 120px;
     width: 100%;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #000;
+    color: #fff;
     border-bottom: 5px solid #ffd700;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
 }
 
 .panel {
-    margin-top: 1rem;
+    margin-top: 150px;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+}
+
+.panel-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .square {
     height: 150px;
     width: 150px;
-    border: 1px solid #ffffff;
+    border: 1px solid #fff;
     background-color: #add8e6;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #add8e6, #cae1ff);
+    margin: 5px;
+    transition: transform 0.2s; /* Smooth scaling effect */
+}
+
+.square:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 .enemy {
     background-image: url("../images/ralph.png");
-    background-size: cover;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .menu-lives {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
 }
 
-.menu-time h2:nth-child(2),
-.menu-score h2:nth-child(2) {
-    margin-top: 1rem;
+.title {
+    font-size: 2.5vw;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ff0000; /* Cor vermelha nos títulos */
 }
 
-.menu-high-score {
-    position: absolute;
-    top: 120px;
-    right: 10px;
-    background-color: #000000;
-    padding: 10px;
-    border: 1px solid #ffd700;
-    border-radius: 5px;
+#high-score, #time-left, #score {
+    font-size: 2.5vw;
+    font-weight: bold;
 }
 
-#high-score {
-    color: #ffffff;
+#lives-display {
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: #ff0000; /* Cor vermelha para a palavra "Lives" */
+}
+
+#lives-display span {
+    color: #fff; /* Cor branca para o x3 */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .square {
+        height: 100px;
+        width: 100px;
+    }
+    .menu {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .square {
+        height: 80px;
+        width: 80px;
+    }
+    .menu {
+        height: 80px;
+    }
 }

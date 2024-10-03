@@ -16,69 +16,56 @@ const state = {
         highScore: 0,
     },
     actions: {
-        timerId: setInterval(randomSquare, 1000),
-        countDownTimerId: setInterval(countDown, 1000),
+        timerId: null,
+        countDownTimerId: null,
     },
 };
+
+function initializeGame() {
+    state.actions.timerId = setInterval(randomSquare, 1000);
+    state.actions.countDownTimerId = setInterval(countDown, 1000);
+}
 
 function countDown() {
     state.values.currentTime--;
     state.view.timeLeft.textContent = state.values.currentTime;
 
     if (state.values.currentTime <= 0) {
-        clearInterval(state.actions.countDownTimerId);
-        clearInterval(state.actions.timerId);
-        playGameOverSound();
-        state.values.lives--;
-        updateLivesDisplay();
-        if (state.values.lives > 0) {
-            Swal.fire({
-                title: 'Você perdeu uma vida!',
-                text: state.values.lives === 1 ? 'Você tem apenas 1 vida restante.\n' : 'Você tem ' + state.values.lives + ' vidas restantes.\n' + 'Sua pontuação é: ' + state.values.result + ' pontos!',
-                icon: 'warning',
-                confirmButtonText: 'Continuar'
-            }).then((result) => {
-                if (result.value) {
-                    // Reinicialize o jogo
-                    state.values.currentTime = 60;
-                    state.values.result = 0; // Resetar o score
-                    state.view.score.textContent = state.values.result;
-                    state.actions.timerId = setInterval(randomSquare, 1000);
-                    state.actions.countDownTimerId = setInterval(countDown, 1000);
-                }
-            });
-        } else {
-            // Game Over
-            Swal.fire({
-                title: 'Game Over!',
-                text: state.values.lives === 1 ? 'Você perdeu a sua única vida!\n' : 'Você perdeu todas as suas vidas!\nSua pontuação é: ' + state.values.result + ' pontos!',
-                icon: 'error',
-                confirmButtonText: 'Reiniciar'
-            }).then((result) => {
-                if (result.value) {
-                    // Reinicialize o jogo
-                    state.values.lives = 3 ;
-                    state.values.result = 0;
-                    state.values.currentTime = 60;
-                    updateLivesDisplay();
-                    state.view.score.textContent = state.values.result;
-                    state.actions.timerId = setInterval(randomSquare, 1000);
-                    state.actions.countDownTimerId = setInterval(countDown, 1000);
-                }
-            });
-        }
-        // Atualizar o high score
-        if (state.values.result > state.values.highScore) {
-            state.values.highScore = state.values.result;
-            state.view.highScoreDisplay.textContent = state.values.highScore;
-        }
+        endGame();
     }
+}
+
+function endGame() {
+    clearInterval(state.actions.countDownTimerId);
+    clearInterval(state.actions.timerId);
+    playGameOverSound();
+    state.values.lives--;
+    updateLivesDisplay();
+
+    if (state.values.lives > 0) {
+        showAlert('Você perdeu uma vida!', 'Você tem ' + state.values.lives + ' vidas restantes.<br> Sua pontuação é: ' + state.values.result + ' pontos!', 'warning', resetGame);
+    } else {
+        showAlert('Game Over!', 'Você perdeu todas as suas vidas!<br> Sua pontuação é: ' + state.values.result + ' pontos!', 'error', resetGame);
+    }
+
+    if (state.values.result > state.values.highScore) {
+        state.values.highScore = state.values.result;
+        state.view.highScoreDisplay.textContent = state.values.highScore;
+    }
+}
+
+function showAlert(title, content, icon, callback) {
+    Swal.fire({
+        title: title,
+        html: content,
+        icon: icon,
+        confirmButtonText: 'Continuar'
+    }).then(callback);
 }
 
 function randomSquare() {
     state.view.squares.forEach((square) => {
-        square.classList.remove("enemy");
-        square.classList.remove("clicked");
+        square.classList.remove("enemy", "clicked");
     });
 
     let randomNumber = Math.floor(Math.random() * 9);
@@ -88,7 +75,7 @@ function randomSquare() {
 }
 
 function updateLivesDisplay() {
-    state.view.livesDisplay.textContent = "x" + state.values.lives;
+    state.view.livesDisplay.innerHTML = `Lives: <span style="color: #fff;">x${state.values.lives}</span>`;
 }
 
 function playSound() {
@@ -101,6 +88,13 @@ function playGameOverSound() {
     let audio = new Audio("./src/audios/game-over.mp3"); 
     audio.volume = 0.2;
     audio.play();
+}
+
+function resetGame() {
+    state.values.currentTime = 60;
+    state.values.result = 0;
+    state.view.score.textContent = state.values.result;
+    initializeGame();
 }
 
 state.view.squares.forEach((square) => {
@@ -128,3 +122,6 @@ document.addEventListener("keydown", (e) => {
         });
     }
 });
+
+// Start the game
+initializeGame();
