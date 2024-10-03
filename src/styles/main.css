@@ -9,7 +9,7 @@
     flex-direction: column;
     height: 100vh;
     background-image: url("../images/wall.png");
-    background-color: #f0f0f0; /* Fallback color */
+    background-color: #f0f0f0; 
 }
 
 .menu {
@@ -50,11 +50,11 @@
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #add8e6, #cae1ff);
     margin: 5px;
-    transition: transform 0.2s; /* Smooth scaling effect */
+    transition: transform 0.2s; 
 }
 
 .square:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    transform: scale(1.05); 
 }
 
 .enemy {
@@ -75,7 +75,7 @@
     font-size: 2.5vw;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #ff0000; /* Cor vermelha nos títulos */
+    color: #ff0000; 
 }
 
 #high-score, #time-left, #score {
@@ -86,14 +86,13 @@
 #lives-display {
     font-size: 2.5vw;
     font-weight: bold;
-    color: #ff0000; /* Cor vermelha para a palavra "Lives" */
+    color: #ff0000; 
 }
 
 #lives-display span {
-    color: #fff; /* Cor branca para o x3 */
+    color: #fff; /
 }
 
-/* Estilos responsivos */
 @media (max-width: 768px) {
     .square {
         height: 100px;
